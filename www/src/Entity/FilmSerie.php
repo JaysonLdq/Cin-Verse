@@ -43,8 +43,7 @@ class FilmSerie
     #[ORM\OneToMany(targetEntity: Note::class, mappedBy: 'filmSerie')]
     private Collection $notes;
 
-    #[ORM\ManyToOne(inversedBy: 'filmSerie')]
-    private ?Saison $saison = null;
+ 
 
     /**
      * @var Collection<int, Acting>
@@ -58,11 +57,18 @@ class FilmSerie
     #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'filmSeries')]
     private Collection $genre;
 
+    /**
+     * @var Collection<int, Saison>
+     */
+    #[ORM\OneToMany(targetEntity: Saison::class, mappedBy: 'filmSerie')]
+    private Collection $saisons;
+
     public function __construct()
     {
         $this->notes = new ArrayCollection();
         $this->acting = new ArrayCollection();
         $this->genre = new ArrayCollection();
+        $this->saisons = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -184,18 +190,7 @@ class FilmSerie
         return $this;
     }
 
-    public function getSaison(): ?Saison
-    {
-        return $this->saison;
-    }
-
-    public function setSaison(?Saison $saison): static
-    {
-        $this->saison = $saison;
-
-        return $this;
-    }
-
+    
     /**
      * @return Collection<int, Acting>
      */
@@ -240,6 +235,36 @@ class FilmSerie
     public function removeGenre(Genre $genre): static
     {
         $this->genre->removeElement($genre);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Saison>
+     */
+    public function getSaisons(): Collection
+    {
+        return $this->saisons;
+    }
+
+    public function addSaison(Saison $saison): static
+    {
+        if (!$this->saisons->contains($saison)) {
+            $this->saisons->add($saison);
+            $saison->setFilmSerie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSaison(Saison $saison): static
+    {
+        if ($this->saisons->removeElement($saison)) {
+            // set the owning side to null (unless already changed)
+            if ($saison->getFilmSerie() === $this) {
+                $saison->setFilmSerie(null);
+            }
+        }
 
         return $this;
     }

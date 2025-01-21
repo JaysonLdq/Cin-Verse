@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    <div class="dashboard-container">
+        <h1 class="dashboard-title">Dashboard</h1>
+        <h2 class="dashboard-greeting">Hello {{ app.user.username }}!</h2>
+        <div class="action-buttons">
+            <a href="#" class="btn btn-view-consoles">Voir les films</a>
+            <a href="#" class="btn btn-view-games">Voir les séries</a>
+            <a href="{{ path('app_user_index') }}"  class="btn btn-manage-users">Gérer les utilisateurs</a>
+        </div>
+    </div>
+{% endblock %}

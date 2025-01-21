@@ -4,7 +4,59 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    padding-top: 80px;
 }
+
+/* Grid des films */
+/* Conteneur principal des vignettes */
+.film-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px; /* Espacement entre les vignettes */
+    margin-top: 80px; /* Ajoute un espace de 80px au-dessus pour éviter que les vignettes ne se collent à la navbar */
+    padding: 20px;
+}
+
+/* Vignette de chaque film */
+.film-item {
+    background-color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    transition: transform 0.3s ease-in-out; /* Ajout de l'animation de transition */
+}
+
+/* Effet au survol de la vignette */
+.film-item:hover {
+    transform: scale(1.05); /* Effet d'agrandissement au survol */
+}
+
+/* Image du film */
+.film-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Titre du film */
+.film-item h2 {
+    font-size: 1.1rem;
+    color: whitesmoke;
+    text-align: center;
+    margin: 0;
+}
+
+/* Retirer la ligne sous les liens des films */
+.film-item-link {
+    text-decoration: none;
+}
+
+
 
 /* Conteneur principal pour la page des détails */
 .details-container {
@@ -14,7 +66,9 @@ body {
     min-height: 100vh;
     padding: 20px;
     background-color: rgb(50, 46, 46);
+    margin-top: 100px; /* Ajout d'un espace de 100px pour éviter que les vignettes ne soient collées à la navbar */
 }
+
 
 /* Carte des détails */
 .details-card {
@@ -242,6 +296,7 @@ button:hover {
     align-items: center;
     gap: 10px;
     position: relative;  /* Ajouté pour positionner le bouton de connexion */
+    
 }
 
 .login-link {
@@ -266,4 +321,399 @@ button:hover {
 .user-email {
     font-size: 1rem;
     color: whitesmoke;
+    position: relative; /* Pour pouvoir utiliser 'left' */
+    left: -75px; /* Décalage de 150px vers la gauche */
+}
+
+/* Style du menu déroulant */
+.user-dropdown {
+    position: relative;
+}
+
+.user-email {
+    font-size: 1rem;
+    color: whitesmoke;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #333;
+    border-radius: 8px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    list-style-type: none;
+    margin: 0;
+    padding: 10px 0;
+}
+
+.user-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+    padding: 10px 20px;
+    color: whitesmoke;
+}
+
+.dropdown-menu li:hover {
+    background-color: #444;
+}
+
+.dropdown-menu a {
+    color: whitesmoke;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
+.dropdown-menu a:hover {
+    background-color: #555;
+}
+
+/* Styles globaux pour le formulaire */
+.game-form {
+    max-width: 500px; /* Limite la largeur du formulaire */
+    margin: 80px auto; /* Centrage du formulaire avec marge de 80px en haut pour éviter de se coller à la navbar */
+    padding: 20px;
+    background-color: #333; /* Fond sombre qui suit la charte graphique */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Ombre légère autour du formulaire */
+    box-sizing: border-box; /* Inclut les bordures et marges dans la largeur totale */
+}
+
+.game-form h1 {
+    font-size: 2rem;
+    color: whitesmoke;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Groupes de formulaires (labels, inputs, erreurs) */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.1rem;
+    color: whitesmoke;
+    margin-bottom: 10px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%; /* Prend toute la largeur disponible du formulaire */
+    padding: 12px 15px;
+    font-size: 1rem;
+    border-radius: 8px;
+    background-color: #444; /* Fond gris sombre pour les champs */
+    color: whitesmoke;
+    border: 1px solid #555;
+    box-sizing: border-box; /* Prendre en compte les bordures et marges dans la largeur */
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #ff6347; /* Bordure rouge vif au focus */
+    outline: none;
+    background-color: #555; /* Fond légèrement plus clair lors du focus */
+}
+
+/* Affichage des erreurs sous chaque champ */
+.form-group .form-error {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
+
+/* Bouton d'envoi */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff6347; /* Couleur rouge vif pour le bouton */
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #e5533d; /* Changement de couleur au survol */
+}
+
+/* Lien pour la connexion */
+.link-auth {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1rem;
+    color: #ff6347;
+    text-decoration: none; /* Enlever la décoration de lien */
+}
+
+.link-auth:hover {
+    text-decoration: underline; /* Souligner le lien au survol */
+}
+
+/* Ajustement pour les messages d'erreur globaux */
+.form-errors {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Conteneur principal du tableau de bord */
+.dashboard-container {
+    max-width: 900px;
+    margin: 100px auto 50px; /* Ajout d'une marge supérieure pour séparer de la navbar */
+    padding: 20px;
+    background-color: #333; /* Fond sombre */
+    color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+/* Titre principal */
+.dashboard-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ff6347; /* Couleur rouge vif */
+}
+
+/* Salutation */
+.dashboard-greeting {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: whitesmoke;
+}
+
+/* Conteneur des boutons */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacement entre les boutons */
+    flex-wrap: wrap; /* Permet de passer sur plusieurs lignes si nécessaire */
+}
+
+/* Style commun pour les boutons */
+.btn {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: whitesmoke;
+    border-radius: 8px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+/* Bouton par défaut */
+.btn:hover {
+    transform: scale(1.05); /* Effet d'agrandissement au survol */
+    color: white;
+}
+
+/* Boutons spécifiques */
+.btn-view-consoles {
+    background-color: #3498db; /* Bleu */
+}
+
+.btn-view-consoles:hover {
+    background-color: #2980b9; /* Bleu plus foncé */
+}
+
+.btn-view-games {
+    background-color: #2ecc71; /* Vert */
+}
+
+.btn-view-games:hover {
+    background-color: #27ae60; /* Vert plus foncé */
+}
+
+.btn-manage-users {
+    background-color: #e74c3c; /* Rouge */
+}
+
+.btn-manage-users:hover {
+    background-color: #c0392b; /* Rouge plus foncé */
+}
+
+/* Style du titre */
+.table-title {
+    font-size: 2rem;
+    color: #ff6347;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Style du tableau */
+.user-table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #333;
+    color: whitesmoke;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+.user-table th,
+.user-table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #444;
+}
+
+.user-table th {
+    background-color: #444;
+    color: #ff6347;
+    font-weight: bold;
+}
+
+.user-table tbody tr:nth-child(odd) {
+    background-color: #3a3a3a;
+}
+
+.user-table tbody tr:nth-child(even) {
+    background-color: #444;
+}
+
+.user-table tbody tr:hover {
+    background-color: #555;
+}
+
+.no-users {
+    text-align: center;
+    color: #d3d3d3;
+    font-style: italic;
+}
+
+/* Boutons d'action */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.action-buttons .btn-view {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.action-buttons .btn-view:hover {
+    background-color: #2980b9;
+    transform: scale(1.1);
+}
+
+.action-buttons .btn-edit {
+    background-color: #e67e22;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.action-buttons .btn-edit:hover {
+    background-color: #d35400;
+    transform: scale(1.1);
+}
+
+/* Style pour les titres h1 */
+.game-list-container h1 {
+    font-size: 2.5rem; /* Taille du texte */
+    color: #ff6347; /* Couleur rouge vif pour correspondre au thème */
+    text-align: center; /* Centrage horizontal */
+    margin-bottom: 20px; /* Espacement sous le titre */
+    text-transform: uppercase; /* Transformation en majuscules */
+    font-weight: bold; /* Texte en gras */
+    letter-spacing: 1.5px; /* Espacement entre les lettres pour une meilleure lisibilité */
+}
+
+/* Style des boutons Add Game */
+.add-game-btn {
+    padding: 12px 25px; /* Espacement intérieur */
+    font-size: 1rem; /* Taille du texte */
+    font-weight: bold; /* Texte en gras */
+    color: whitesmoke; /* Couleur du texte */
+    background-color: #3498db; /* Fond bleu pour le bouton */
+    border: none; /* Supprime les bordures par défaut */
+    border-radius: 8px; /* Coins arrondis */
+    text-decoration: none; /* Supprime le soulignement des liens */
+    cursor: pointer; /* Curseur en main */
+    transition: all 0.3s ease; /* Transition pour les animations */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Ombre douce */
+    display: inline-block; /* Permet d'avoir un comportement de bouton classique */
+    text-align: center; /* Centre le texte */
+}
+
+/* Effet au survol pour le bouton Add Game */
+.add-game-btn:hover {
+    background-color: #2980b9; /* Fond bleu plus foncé au survol */
+    color: white; /* Renforce la visibilité du texte */
+    transform: scale(1.05); /* Légère mise en avant */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4); /* Accentuation de l'ombre */
+}
+
+/* Effet au focus pour le bouton Add Game */
+.add-game-btn:focus {
+    outline: none; /* Supprime la bordure de focus par défaut */
+    border: 2px solid #ff6347; /* Bordure rouge vif au focus */
+    background-color: #2980b9; /* Fond bleu au focus */
+}
+
+/* Espacement pour le conteneur des boutons d'action */
+.action-buttons {
+    margin-top: 30px; /* Ajoute une marge de 30px au-dessus du conteneur pour éviter que les boutons ne soient collés à la navbar */
+    text-align: center; /* Centrer les boutons si nécessaire */
+}
+
+/* Style spécifique pour les boutons de la classe btn-dashboard */
+.btn-dashboard {
+    padding: 12px 25px; /* Espacement intérieur */
+    font-size: 1rem; /* Taille du texte */
+    font-weight: bold; /* Texte en gras */
+    color: whitesmoke; /* Couleur du texte */
+    background-color: #3498db; /* Fond bleu pour le bouton */
+    border: none; /* Supprime les bordures par défaut */
+    border-radius: 8px; /* Coins arrondis */
+    text-decoration: none; /* Supprime le soulignement des liens */
+    cursor: pointer; /* Curseur en main */
+    transition: all 0.3s ease; /* Transition pour les animations */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Ombre douce */
+    display: inline-block; /* Permet d'avoir un comportement de bouton classique */
+    text-align: center; /* Centre le texte */
+}
+
+/* Effet au survol pour le bouton Retour au dashboard */
+.btn-dashboard:hover {
+    background-color: #2980b9; /* Fond bleu plus foncé au survol */
+    color: white; /* Renforce la visibilité du texte */
+    transform: scale(1.05); /* Légère mise en avant */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4); /* Accentuation de l'ombre */
+}
+
+/* Effet au focus pour le bouton Retour au dashboard */
+.btn-dashboard:focus {
+    outline: none; /* Supprime la bordure de focus par défaut */
+    border: 2px solid #ff6347; /* Bordure rouge vif au focus */
+    background-color: #2980b9; /* Fond bleu au focus */
 }

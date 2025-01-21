@@ -1,6 +1,6 @@
 <header class="navbar">
     <div class="navbar-logo">
-        <a href="/">MyFlix</a> <!-- Logo de ton site (remplace par ton logo ou texte) -->
+        <a href="/">MyFlix</a>
     </div>
     <nav class="navbar-links">
         <ul>
@@ -11,13 +11,19 @@
     </nav>
     <div class="navbar-user">
         {% if app.user %}
-            <!-- Si l'utilisateur est connecté, afficher son email -->
-            <span class="user-email">{{ app.user.email }}</span>
+            <!-- Si l'utilisateur est connecté, afficher son email avec un menu déroulant -->
+            <div class="user-dropdown">
+                <span class="user-email">{{ app.user.username }}</span>
+                <ul class="dropdown-menu">
+                    <li><a href="/profil">Mon profil</a></li>
+                    {% if 'ROLE_ADMIN' in app.user.roles %}
+                        <li><a href="/admin/dashboard">Dashboard</a></li>
+                    {% endif %}
+                    <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                </ul>
+            </div>
         {% else %}
-            <!-- Si l'utilisateur n'est pas connecté, afficher un lien vers la page de login -->
-            <a href="#" class="login-link">Connexion</a>
+            <a href="{{ path('app_login') }}" class="login-link">Connexion</a>
         {% endif %}
     </div>
 </header>
-
-{# {{ path('app_login') }} #}

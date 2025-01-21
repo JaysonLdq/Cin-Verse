@@ -22,11 +22,7 @@ class Saison
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    /**
-     * @var Collection<int, FilmSerie>
-     */
-    #[ORM\OneToMany(targetEntity: FilmSerie::class, mappedBy: 'saison')]
-    private Collection $filmSerie;
+   
 
     /**
      * @var Collection<int, Episode>
@@ -34,9 +30,11 @@ class Saison
     #[ORM\OneToMany(targetEntity: Episode::class, mappedBy: 'saison')]
     private Collection $episodes;
 
+    #[ORM\ManyToOne(inversedBy: 'saisons')]
+    private ?FilmSerie $filmSerie = null;
+
     public function __construct()
     {
-        $this->filmSerie = new ArrayCollection();
         $this->episodes = new ArrayCollection();
     }
 
@@ -69,36 +67,7 @@ class Saison
         return $this;
     }
 
-    /**
-     * @return Collection<int, FilmSerie>
-     */
-    public function getFilmSerie(): Collection
-    {
-        return $this->filmSerie;
-    }
-
-    public function addFilmSerie(FilmSerie $filmSerie): static
-    {
-        if (!$this->filmSerie->contains($filmSerie)) {
-            $this->filmSerie->add($filmSerie);
-            $filmSerie->setSaison($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFilmSerie(FilmSerie $filmSerie): static
-    {
-        if ($this->filmSerie->removeElement($filmSerie)) {
-            // set the owning side to null (unless already changed)
-            if ($filmSerie->getSaison() === $this) {
-                $filmSerie->setSaison(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
     /**
      * @return Collection<int, Episode>
      */
@@ -125,6 +94,18 @@ class Saison
                 $episode->setSaison(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFilmSerie(): ?FilmSerie
+    {
+        return $this->filmSerie;
+    }
+
+    public function setFilmSerie(?FilmSerie $filmSerie): static
+    {
+        $this->filmSerie = $filmSerie;
 
         return $this;
     }
