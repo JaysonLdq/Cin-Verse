@@ -40,4 +40,18 @@ class FilmSerieRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    /**
+     * Récupérer un films/séries par son id
+     * @param int $id
+     * @return FilmSerie|null
+     */
+    public function findFilmById(int $id): ?FilmSerie
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

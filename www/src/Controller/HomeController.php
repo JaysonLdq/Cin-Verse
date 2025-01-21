@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\FilmSerie;
 use App\Repository\FilmSerieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,4 +23,17 @@ class HomeController extends AbstractController
             'films' => $films,
         ]);
     }
+
+    #[Route('/detail/{id}', name: 'app_detail')]
+    public function filmById(FilmSerieRepository $filmSerieRepository,int $id):Response
+    {
+        //on recupère le jeux avec ses notes et son age
+        $movie = $filmSerieRepository->findFilmById($id);
+        
+
+        return $this->render('home/details.html.twig', [
+            'movie' => $movie,
+        ]);
+    }
+
 }

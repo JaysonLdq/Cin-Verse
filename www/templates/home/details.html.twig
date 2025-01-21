@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ movie.title | default('Détails du film') }}
+{% endblock %}
+
+{% block body %}
+    <div class="details-container">
+        <div class="details-card">
+            <img src="{{ asset('images/movies/' ~ movie.imagePath) }}" alt="{{ movie.title }}">
+            <h1>{{ movie.title }}</h1>
+            
+            <p class="description">{{ movie.description }}</p>
+            <div class="episodes-section">
+                <h3>Saisons & Épisodes</h3>
+                <div class="seasons-dropdown">
+                    <label for="seasons">Choisir la saison :</label>
+                    <select id="seasons" name="seasons">
+                        <option value="season-1">Saison 1</option>
+                        <option value="season-2">Saison 2</option>
+                        <option value="season-3">Saison 3</option>
+                    </select>
+                </div>
+
+                <div class="episodes-list">
+                    <ul>
+                        <li>Épisode 1: Titre de l'épisode</li>
+                        <li>Épisode 2: Titre de l'épisode</li>
+                        <li>Épisode 3: Titre de l'épisode</li>
+                    </ul>
+                </div>
+            </div>
+
+            <button onclick="window.history.back()">Retour à la liste</button>
+        </div>
+    </div>
+{% endblock %}
