@@ -1,0 +1,23 @@
+<header class="navbar">
+    <div class="navbar-logo">
+        <a href="/">MyFlix</a> <!-- Logo de ton site (remplace par ton logo ou texte) -->
+    </div>
+    <nav class="navbar-links">
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/films">Films</a></li>
+            <li><a href="/series">Séries</a></li>
+        </ul>
+    </nav>
+    <div class="navbar-user">
+        {% if app.user %}
+            <!-- Si l'utilisateur est connecté, afficher son email -->
+            <span class="user-email">{{ app.user.email }}</span>
+        {% else %}
+            <!-- Si l'utilisateur n'est pas connecté, afficher un lien vers la page de login -->
+            <a href="#" class="login-link">Connexion</a>
+        {% endif %}
+    </div>
+</header>
+
+{# {{ path('app_login') }} #}
