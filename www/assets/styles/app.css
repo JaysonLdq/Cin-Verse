@@ -752,3 +752,81 @@ button:hover {
     color: #2980b9;
     margin: 10px 0;
 }
+
+.film-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 20px 0;
+}
+
+.film-table th, .film-table td {
+	padding: 10px;
+	text-align: left;
+	border: 1px solid #ddd;
+}
+
+.film-image {
+	max-width: 100px;
+	height: auto;
+}
+
+.add-film-btn {
+	display: inline-block;
+	margin: 10px 0;
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 5px;
+}
+
+.film-actions a {
+	margin-right: 10px;
+	text-decoration: none;
+	color: #007bff;
+}
+
+.delete-link {
+	color: #dc3545;
+}
+
+/* Stylisation du titre */
+.page-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Stylisation du formulaire */
+.film-serie-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #333 !important;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Stylisation des groupes de champs */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Stylisation du bouton */
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}

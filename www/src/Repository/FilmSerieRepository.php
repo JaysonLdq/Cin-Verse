@@ -16,33 +16,19 @@ class FilmSerieRepository extends ServiceEntityRepository
         parent::__construct($registry, FilmSerie::class);
     }
 
-    //    /**
-    //     * @return FilmSerie[] Returns an array of FilmSerie objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('f')
-    //            ->andWhere('f.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('f.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    // Ajout de la méthode save
+    public function save(FilmSerie $filmSerie, bool $flush = false): void
+    {
+        $entityManager = $this->getEntityManager();
+        $entityManager->persist($filmSerie);
 
-    //    public function findOneBySomeField($value): ?FilmSerie
-    //    {
-    //        return $this->createQueryBuilder('f')
-    //            ->andWhere('f.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        if ($flush) {
+            $entityManager->flush();
+        }
+    }
 
     /**
-     * Récupérer un films/séries par son id
+     * Récupérer un film/une série par son id
      * @param int $id
      * @return FilmSerie|null
      */
@@ -54,4 +40,17 @@ class FilmSerieRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    // src/Repository/FilmSerieRepository.php
+
+    public function findFilmsByGenre(int $genreId)
+    {
+        return $this->createQueryBuilder('f')
+            ->innerJoin('f.genre', 'g')  // Assure-toi que tu as une relation entre FilmSerie et Genre dans ton entité
+            ->andWhere('g.id = :genreId')
+            ->setParameter('genreId', $genreId)
+            ->getQuery()
+            ->getResult();
+    }
+
 }

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Films et Séries
+{% endblock %}
+
+{% block body %}
+	<div class="film-list-container">
+		{% include "components/_dashboard_button.html.twig" %}
+		<h1>Liste des Films et Séries</h1>
+		<a href="{{ path('app_filmSerie_new') }}" class="add-film-btn">Ajouter un film ou une série</a>
+
+		<table class="film-table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Image</th>
+					<th>Titre</th>
+					<th>Description</th>
+					<th>Durée (min)</th>
+					<th>Date de sortie</th>
+					<th>Langues</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for film in films %}
+					<tr>
+						<td>{{ film.id }}</td>
+						<td>
+							{% if film.imagePath %}
+								<img src="{{ asset('images/movies/' ~ film.imagePath) }}" alt="{{ film.title }}" class="film-image">
+							{% else %}
+								Aucune image
+							{% endif %}
+						</td>
+						<td>{{ film.title }}</td>
+						<td>{{ film.description|length > 50 ? film.description|slice(0, 50) ~ '...' : film.description }}</td>
+						<td>{{ film.duration }}</td>
+						<td>{{ film.releaseDate|date('d/m/Y') }}</td>
+						<td>{{ film.language }}</td>
+						<td>
+							<div class="film-actions">
+								<a href="{{ path('app_filmSerie_show', {'id': film.id}) }}" class="view-link">Voir</a>
+								<a href="{{ path('app_filmSerie_delete', {'id': film.id}) }}" class="delete-link"
+								   onclick="return confirm('Voulez-vous vraiment supprimer ce film/série ?');">Supprimer</a>
+							</div>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="8">Aucun film ou série trouvé</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="{{ path('app_filmSerie_new') }}" class="add-film-btn">Ajouter un film ou une série</a>
+	</div>
+{% endblock %}
