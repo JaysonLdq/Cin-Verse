@@ -11,6 +11,17 @@
             <h1>{{ movie.title }}</h1>
             
             <p class="description">{{ movie.description }}</p>
+
+            <!-- Affichage des genres -->
+            <div class="genres-section">
+                <h3>Genres</h3>
+                <ul>
+                    {% for genre in genres %}
+                        <li>{{ genre.label }}</li> 
+                    {% endfor %}
+                </ul>
+            </div>
+
             <div class="episodes-section">
                 <h3>Saisons & Épisodes</h3>
                 <div class="seasons-dropdown">

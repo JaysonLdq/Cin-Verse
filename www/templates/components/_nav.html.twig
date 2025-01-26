@@ -5,8 +5,9 @@
     <nav class="navbar-links">
         <ul>
             <li><a href="/">Accueil</a></li>
-            <li><a href="/films">Films</a></li>
-            <li><a href="/series">Séries</a></li>
+            <li><a href="{{ path('app_film_by_genre', {'genreName': 'Film'}) }}">Film</a></li>
+            <li><a href="{{ path('app_film_by_genre', {'genreName': 'Serie'}) }}">Serie</a></li>
+         
         </ul>
     </nav>
     <div class="navbar-user">

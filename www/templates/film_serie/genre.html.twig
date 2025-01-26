@@ -1,0 +1,21 @@
+{# On recupère notre base #}
+{% extends "base.html.twig" %}
+{# On peut redefinir le titre de l'onglet #}
+{% block title %}
+    {{ title | default('Nos films & séries') }}
+{% endblock %}
+
+{% block body %}
+    <div class="film-grid">
+        {% for film in films %}
+            <a href="{{ path('app_detail', { id: film.id }) }}" class="film-item-link">
+                <div class="film-item">
+                    <img src="{{ asset('images/movies/' ~ film.imagePath) }}" alt="{{ film.title }}">
+                    <h2>{{ film.title }}</h2>
+                </div>
+            </a>
+        {% else %}
+            <p>Aucun film trouvé.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

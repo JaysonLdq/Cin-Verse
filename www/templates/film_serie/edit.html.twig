@@ -1,0 +1,19 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Édition de {{ filmSerie.title }}{% endblock %}
+
+{% block body %}
+    <h1 class="genre-edit-title">Édition de {{ filmSerie.title }}</h1>
+<div class="form-edit-genre">
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.image) }}
+        <button class="btn btn-primary">Mettre à jour</button>
+    {{ form_end(form) }}
+</div>
+
+    <a href="{{ path('app_film_serie') }}" class="btn btn-secondary">Retour à la liste</a>
+{% endblock %}

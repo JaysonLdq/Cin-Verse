@@ -41,6 +41,7 @@
 						<td>
 							<div class="film-actions">
 								<a href="{{ path('app_filmSerie_show', {'id': film.id}) }}" class="view-link">Voir</a>
+								<a href="{{ path('app_filmSerie_edit', {'id': film.id}) }}" class="edit-link">Modifier</a>
 								<a href="{{ path('app_filmSerie_delete', {'id': film.id}) }}" class="delete-link"
 								   onclick="return confirm('Voulez-vous vraiment supprimer ce film/série ?');">Supprimer</a>
 							</div>

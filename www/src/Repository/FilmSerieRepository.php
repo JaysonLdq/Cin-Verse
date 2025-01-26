@@ -41,12 +41,15 @@ class FilmSerieRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-    // src/Repository/FilmSerieRepository.php
-
+   
+    /**
+     * Récupérer tous les genres distincts
+     * @return array
+     */
     public function findFilmsByGenre(int $genreId)
     {
         return $this->createQueryBuilder('f')
-            ->innerJoin('f.genre', 'g')  // Assure-toi que tu as une relation entre FilmSerie et Genre dans ton entité
+            ->innerJoin('f.genre', 'g') 
             ->andWhere('g.id = :genreId')
             ->setParameter('genreId', $genreId)
             ->getQuery()

@@ -15,7 +15,9 @@
     </head>
     <body>
         {% block menu %}
-			{% include "components/_nav.html.twig" %}
+			
+            {% include "components/_nav_genre.html.twig" %}
+            {% include "components/_nav.html.twig" %}
 		{% endblock %}
         {% block body %}{% endblock %}
     </body>
