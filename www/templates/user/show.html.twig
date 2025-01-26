@@ -10,7 +10,7 @@
 		<img src="{{asset('images/user.png')}}" class="card-img-top" alt="photo profil">
 		<div class="card-body">
 			<h5 class="card-title">{{user.username}}</h5>
-			{{user.roles|badge_user}}
+			{{user.roles|join(', ')}}
 
 			<p class="card-text">{{user.email}}</p>
 		</div>
