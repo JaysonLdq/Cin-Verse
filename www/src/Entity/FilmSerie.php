@@ -43,8 +43,6 @@ class FilmSerie
     #[ORM\OneToMany(targetEntity: Note::class, mappedBy: 'filmSerie')]
     private Collection $notes;
 
- 
-
     /**
      * @var Collection<int, Acting>
      */
@@ -55,6 +53,7 @@ class FilmSerie
      * @var Collection<int, Genre>
      */
     #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'filmSeries')]
+    #[ORM\JoinTable(name: 'film_serie_genre')]
     private Collection $genre;
 
     /**
@@ -190,7 +189,6 @@ class FilmSerie
         return $this;
     }
 
-    
     /**
      * @return Collection<int, Acting>
      */

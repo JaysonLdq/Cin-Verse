@@ -16,28 +16,29 @@ class GenreRepository extends ServiceEntityRepository
         parent::__construct($registry, Genre::class);
     }
 
-    //    /**
-    //     * @return Genre[] Returns an array of Genre objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('g')
-    //            ->andWhere('g.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('g.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+   //on va recuperer les genres
+    public function getGenres(): array
+    {
+        $qb = $this->createQueryBuilder('g')
+            ->select('g.id', 'g.name')
+            ->orderBy('g.name', 'ASC')
+            ->getQuery();
 
-    //    public function findOneBySomeField($value): ?Genre
-    //    {
-    //        return $this->createQueryBuilder('g')
-    //            ->andWhere('g.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        return $qb->getArrayResult();
+    }
+    public static function getGenreChoices($entityManager)
+{
+    $genres = $entityManager->getRepository(Genre::class)->findAll(); // Récupérer tous les genres
+
+    $choices = [];
+    foreach ($genres as $genre) {
+        $choices[$genre->getName()] = $genre->getId(); // Affiche le nom du genre et utilise l'ID comme valeur
+    }
+
+    return $choices;
+}
+
+    
+
+
 }

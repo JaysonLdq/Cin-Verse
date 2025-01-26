@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 namespace App\Controller;
 
 use App\Entity\FilmSerie;
@@ -37,10 +36,6 @@ class FilmSerieController extends AbstractController
             'genres' => $genres, 
         ]);
     }
-
-   
-
-
 
     #[Route('/delete/{id}', name: 'app_filmSerie_delete')]
     public function delete(FilmSerieRepository $filmSerieRepository, FilmSerie $filmSerie, Request $request): Response
@@ -94,7 +89,6 @@ class FilmSerieController extends AbstractController
         return $this->render('film_serie/new.html.twig', [
             'form' => $form->createView(),
         ]);
-
     }
 
     #[Route('/genre/{genreName}', name: 'app_film_by_genre')]
@@ -110,53 +104,54 @@ class FilmSerieController extends AbstractController
     }
 
     #[Route('/admin/edit/{id}', name: 'app_filmSerie_edit', methods: ['GET', 'POST'])]
-public function edit(int $id, Request $request, FilmSerieRepository $filmSerieRepository): Response
-{
-    // Récupérer le film par son ID
-    $filmSerie = $filmSerieRepository->find($id);
+    public function edit(int $id, Request $request, FilmSerieRepository $filmSerieRepository): Response
+    {
+        // Récupérer le film par son ID
+        $filmSerie = $filmSerieRepository->find($id);
 
-    // Vérifier si le film existe
-    if (!$filmSerie) {
-        throw $this->createNotFoundException('Le film ou la série avec cet ID n\'existe pas.');
-    }
-
-    // Créer le formulaire d'édition
-    $form = $this->createForm(FilmSerieType::class, $filmSerie);
-    $form->handleRequest($request);
-
-    // Gérer la soumission du formulaire
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Traitement de l'image si elle est modifiée
-        $imageFile = $form->get('image')->getData();
-        if ($imageFile) {
-            // Si une nouvelle image est uploadée, gérer l'image
-            $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $newFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-            try {
-                $imageFile->move(
-                    $this->getParameter('filmSerie_images_directory'),
-                    $newFilename
-                );
-            } catch (FileException $e) {
-                $this->addFlash('danger', 'Une erreur est survenue lors de l\'upload de l\'image');
-            }
-
-            // Mettre à jour le chemin de l'image dans l'entité
-            $filmSerie->setImagePath($newFilename);
+        // Vérifier si le film existe
+        if (!$filmSerie) {
+            throw $this->createNotFoundException('Le film ou la série avec cet ID n\'existe pas.');
         }
 
-        // Sauvegarder les modifications
-        $filmSerieRepository->save($filmSerie, true);
-        $this->addFlash('success', 'Film ou série modifié avec succès !');
+        // Créer le formulaire d'édition
+        $form = $this->createForm(FilmSerieType::class, $filmSerie);
+        $form->handleRequest($request);
 
-        // Rediriger vers la liste des films après modification
-        return $this->redirectToRoute('app_film_serie');
+        // Gérer la soumission du formulaire
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Traitement de l'image si elle est modifiée
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                // Si une nouvelle image est uploadée, gérer l'image
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                try {
+                    $imageFile->move(
+                        $this->getParameter('filmSerie_images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    $this->addFlash('danger', 'Une erreur est survenue lors de l\'upload de l\'image');
+                }
+
+                // Mettre à jour le chemin de l'image dans l'entité
+                $filmSerie->setImagePath($newFilename);
+            }
+
+            // Sauvegarder les modifications
+            $filmSerieRepository->save($filmSerie, true);
+            $this->addFlash('success', 'Film ou série modifié avec succès !');
+
+            // Rediriger vers la liste des films après modification
+            return $this->redirectToRoute('app_film_serie');
+        }
+
+        return $this->render('film_serie/edit.html.twig', [
+            'form' => $form->createView(),
+            'filmSerie' => $filmSerie,
+        ]);
     }
 
-    return $this->render('film_serie/edit.html.twig', [
-        'form' => $form->createView(),
-        'filmSerie' => $filmSerie,
-    ]);
-}
-
+    
 }
