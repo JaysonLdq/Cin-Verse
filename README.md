@@ -12,3 +12,9 @@ Avec CinéVerse, vous accédez à un univers riche et varié, pensé pour vous o
 Rejoignez-nous et laissez-vous emporter par la magie du 7ᵉ art ! 🎬✨
 
 ## Comment lancer CinéVerse ? 
+
+taper dans un nouveau terminal les commandes suivantes: 
+
+-ccomposer install 
+-cconsole d:m:m
+-cconsole d:f:l 
