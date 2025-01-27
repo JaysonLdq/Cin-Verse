@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Age;
 use App\Entity\FilmSerie;
 use App\Entity\Genre;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -46,6 +48,12 @@ class FilmSerieType extends AbstractType
                 'choice_label' => 'label',
                 'multiple' => true,
                 'expanded' => false,
+            ])->add('age', EntityType::class, [
+                'class' => Age::class,
+                'choice_label' => 'label',
+                'multiple' => false,
+                'expanded' => false,
+                   
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrer',
