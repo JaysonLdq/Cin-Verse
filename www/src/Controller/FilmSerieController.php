@@ -3,12 +3,12 @@ namespace App\Controller;
 
 use App\Entity\FilmSerie;
 use App\Form\FilmSerieType;
+use App\Repository\NoteRepository;
 use App\Repository\FilmSerieRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Repository\NoteRepository;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class FilmSerieController extends AbstractController
@@ -36,17 +36,19 @@ class FilmSerieController extends AbstractController
             'genres' => $genres, 
         ]);
     }
+    #[Route('/delete/{id}', name: 'app_filmSerie_delete', methods: ['GET', 'POST'])]
 
-    #[Route('/delete/{id}', name: 'app_filmSerie_delete')]
     public function delete(FilmSerieRepository $filmSerieRepository, FilmSerie $filmSerie, Request $request): Response
     {
-        // Vérifier si le token CSRF est valide
         if ($this->isCsrfTokenValid('delete' . $filmSerie->getId(), $request->request->get('_token'))) {
-            $filmSerieRepository->delete($filmSerie, true);
+            $filmSerieRepository->remove($filmSerie, true);
         }
-
+    
         return $this->redirectToRoute('app_film_serie', [], Response::HTTP_SEE_OTHER);
     }
+    
+
+    
 
     #[Route('/new', name: 'app_filmSerie_new', methods: ['GET', 'POST'])]
     public function new(Request $request, FilmSerieRepository $filmSerieRepository, NoteRepository $noteRepository): Response
@@ -152,6 +154,8 @@ class FilmSerieController extends AbstractController
             'filmSerie' => $filmSerie,
         ]);
     }
+
+    
 
     
 }

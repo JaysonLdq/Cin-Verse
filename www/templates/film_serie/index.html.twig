@@ -28,7 +28,7 @@
 						<td>{{ film.id }}</td>
 						<td>
 							{% if film.imagePath %}
-								<img src="{{ asset('images/movies/' ~ film.imagePath) }}" alt="{{ film.title }}" class="film-image">
+								<img src="{{ asset('images/filmSeries/movies/' ~ film.imagePath) }}" alt="{{ film.title }}" class="film-image">
 							{% else %}
 								Aucune image
 							{% endif %}
@@ -42,8 +42,12 @@
 							<div class="film-actions">
 								<a href="{{ path('app_filmSerie_show', {'id': film.id}) }}" class="view-link">Voir</a>
 								<a href="{{ path('app_filmSerie_edit', {'id': film.id}) }}" class="edit-link">Modifier</a>
-								<a href="{{ path('app_filmSerie_delete', {'id': film.id}) }}" class="delete-link"
-								   onclick="return confirm('Voulez-vous vraiment supprimer ce film/série ?');">Supprimer</a>
+								<form action="{{ path('app_filmSerie_delete', {'id': film.id}) }}" method="post" style="display:inline;">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ film.id) }}">
+									<button type="submit" class="delete-link" onclick="return confirm('Voulez-vous vraiment supprimer ce film/série ?');">
+										Supprimer
+									</button>
+								</form>
 							</div>
 						</td>
 					</tr>

@@ -32,6 +32,7 @@ services:
       - MYSQL_DATABASE=symfony # nom de la base de données
       - MYSQL_USER=admin # nom de l'utilisateur
       - MYSQL_PASSWORD=admin # mot de passe de l'utilisateur
+      
     volumes:
       # volumes montés
       - ./mysql:/var/lib/mysql

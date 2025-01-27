@@ -54,8 +54,23 @@ class FilmSerieRepository extends ServiceEntityRepository
             ->setParameter('genreId', $genreId)
             ->getQuery()
             ->getResult();
+            
     }
 
-    
+    /**
+     * Supprimer un film/série
+     * @param FilmSerie $entity
+     * @param bool $flush
+     * @return void
+     */
+    public function remove(FilmSerie $entity, bool $flush = false): void
+    {
+        // Utilisez getEntityManager() pour accéder à l'EntityManager
+        $entityManager = $this->getEntityManager();
+        $entityManager->remove($entity); // Marquer l'entité pour suppression
+        if ($flush) {
+            $entityManager->flush(); // Appliquer les changements dans la base de données
+        }
+    }
 
 }

@@ -10,7 +10,7 @@
         {% for film in films %}
             <a href="{{ path('app_detail', { id: film.id }) }}" class="film-item-link">
                 <div class="film-item">
-                    <img src="{{ asset('images/movies/' ~ film.imagePath) }}" alt="{{ film.title }}">
+                    <img src="{{ asset('images/filmSeries/movies/' ~ film.imagePath) }}" alt="{{ film.title }}">
                     <h2>{{ film.title }}</h2>
                 </div>
             </a>
