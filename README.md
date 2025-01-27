@@ -21,4 +21,4 @@ taper dans un nouveau terminal les commandes suivantes:
 
 ## MCD
 
-![Image mdc](.public/images/mdc.jpg)
+![Image mdc](.public/images/mdc.png)
