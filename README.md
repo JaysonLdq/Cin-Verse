@@ -18,3 +18,7 @@ taper dans un nouveau terminal les commandes suivantes:
 -ccomposer install 
 -cconsole d:m:m
 -cconsole d:f:l 
+
+## MCD
+
+![Image mdc](./images/mdc.jpg)
